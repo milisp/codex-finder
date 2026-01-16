@@ -1,0 +1,9 @@
+[package]
+name = "codex-finder"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0"
+regex = "1.12"
+log = "0.4"
