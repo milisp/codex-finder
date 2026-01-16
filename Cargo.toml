@@ -1,9 +1,19 @@
 [package]
 name = "codex-finder"
-version = "0.1.0"
+version = "0.1.1"
+authors = ["Milisp <milisp@proton.me>"]
 edition = "2024"
+license = "MIT"
+description = "Locate the codex and coder CLI binaries."
+repository = "https://github.com/milisp/codex-finder"
+homepage = "https://github.com/milisp/codex-finder"
+keywords = ["codex", "coder", "code"]
+categories = ["development-tools::debugging", "development-tools::profiling"]
+readme = "README.md"
 
 [dependencies]
+log = "0.4"
+
+[target.'cfg(windows)'.dependencies]
 anyhow = "1.0"
 regex = "1.12"
-log = "0.4"
