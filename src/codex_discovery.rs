@@ -109,18 +109,18 @@ pub fn discover_codex_command() -> Option<PathBuf> {
     }
 
     // Windows npm global installation paths
-    if cfg!(windows) {
-        if let Ok(appdata) = std::env::var("APPDATA") {
-            let npm_paths = [
-                PathBuf::from(&appdata).join("npm").join("codex.cmd"),
-                PathBuf::from(&appdata).join("npm").join("codex.ps1"),
-                PathBuf::from(&appdata).join("npm").join("codex"),
-            ];
-            for path_buf in &npm_paths {
-                if path_buf.exists() {
-                    log::debug!("Found npm codex at {}", path_buf.display());
-                    return Some(path_buf.clone());
-                }
+    if cfg!(windows)
+        && let Ok(appdata) = std::env::var("APPDATA")
+    {
+        let npm_paths = [
+            PathBuf::from(&appdata).join("npm").join("codex.cmd"),
+            PathBuf::from(&appdata).join("npm").join("codex.ps1"),
+            PathBuf::from(&appdata).join("npm").join("codex"),
+        ];
+        for path_buf in &npm_paths {
+            if path_buf.exists() {
+                log::debug!("Found npm codex at {}", path_buf.display());
+                return Some(path_buf.clone());
             }
         }
     }
@@ -136,12 +136,12 @@ pub fn discover_codex_command() -> Option<PathBuf> {
     for path_buf in &native_paths {
         if path_buf.exists() {
             // Check if it's a real binary (not a js wrapper)
-            if let Ok(content) = std::fs::read_to_string(path_buf) {
-                if content.contains("codex.js") || content.starts_with("#!/usr/bin/env node") {
-                    // This is a wrapper script, skip it
-                    log::debug!("Skipping wrapper script at {}", path_buf.display());
-                    continue;
-                }
+            if let Ok(content) = std::fs::read_to_string(path_buf)
+                && (content.contains("codex.js") || content.starts_with("#!/usr/bin/env node"))
+            {
+                // This is a wrapper script, skip it
+                log::debug!("Skipping wrapper script at {}", path_buf.display());
+                continue;
             }
             log::debug!("Found native codex binary at {}", path_buf.display());
             return Some(path_buf.clone());
