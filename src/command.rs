@@ -51,7 +51,7 @@ pub fn create_silent_command(program: &str) -> StdCommand {
 /// from appearing when running external processes.
 #[cfg(windows)]
 pub fn create_tokio_command(program: &str) -> TokioCommand {
-    use std::os::windows::process::CommandExt;
+
 
     const CREATE_NO_WINDOW: u32 = 0x08000000;
 
@@ -70,7 +70,7 @@ pub fn create_tokio_command(program: &str) -> TokioCommand {
 /// This is useful for async commands that don't need stdin and should run silently.
 #[cfg(windows)]
 pub fn create_tokio_silent_command(program: &str) -> TokioCommand {
-    use std::os::windows::process::CommandExt;
+
 
     const CREATE_NO_WINDOW: u32 = 0x08000000;
 
