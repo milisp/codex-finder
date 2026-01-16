@@ -199,7 +199,8 @@ pub fn discover_codex_command() -> Option<PathBuf> {
             for distro in distros {
                 // Try to find codex in WSL PATH
                 if let Ok(output) = wsl::exec_in_wsl(&distro.name, "which codex")
-                    && !output.is_empty() {
+                    && !output.is_empty()
+                {
                     log::debug!("Found codex in WSL {} at {}", distro.name, output);
                     // Return a special marker that indicates WSL path
                     // Format: wsl://<distro>/<wsl_path>
@@ -221,7 +222,8 @@ pub fn discover_codex_command() -> Option<PathBuf> {
                 for wsl_path in &wsl_paths {
                     let check_cmd = format!("test -f {} && echo {}", wsl_path, wsl_path);
                     if let Ok(output) = wsl::exec_in_wsl(&distro.name, &check_cmd)
-                        && !output.is_empty() {
+                        && !output.is_empty()
+                    {
                         log::debug!("Found codex in WSL {} at {}", distro.name, output.trim());
                         return Some(PathBuf::from(format!(
                             "wsl://{}/{}",

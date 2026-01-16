@@ -134,8 +134,9 @@ pub fn get_preferred_distro(preferred: Option<&str>) -> Option<String> {
     }
 
     // If preferred is specified and exists, use it
-    if let Some(pref) = preferred 
-        && distros.iter().any(|d| d.name == pref) {
+    if let Some(pref) = preferred
+        && distros.iter().any(|d| d.name == pref)
+    {
         return Some(pref.to_string());
     }
 
@@ -181,7 +182,8 @@ pub fn win_to_wsl<P: AsRef<Path>>(win_path: P, distro: Option<&str>) -> Result<S
         && let Ok(output) = create_silent_command("wsl.exe")
             .args(["-d", distro_name, "wslpath", "-a", &path_str])
             .output()
-        && output.status.success() {
+        && output.status.success()
+    {
         let wsl_path = String::from_utf8_lossy(&output.stdout);
         return Ok(wsl_path.trim().to_string());
     }
@@ -192,7 +194,8 @@ pub fn win_to_wsl<P: AsRef<Path>>(win_path: P, distro: Option<&str>) -> Result<S
 
     if let Some(drive_letter) = path_str.chars().next()
         && path_str.len() > 2
-        && path_str.chars().nth(1) == Some(':') {
+        && path_str.chars().nth(1) == Some(':')
+    {
         let drive = drive_letter.to_lowercase();
         let rest = &path_str[2..];
         return Ok(format!("/mnt/{}{}", drive, rest));
