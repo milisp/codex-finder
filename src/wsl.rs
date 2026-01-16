@@ -360,6 +360,7 @@ pub fn get_wsl_codex_roots() -> Vec<PathBuf> {
 
 #[cfg(test)]
 mod tests {
+    #[cfg(windows)]
     use super::*;
 
     #[test]
