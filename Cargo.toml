@@ -1,6 +1,6 @@
 [package]
 name = "codex-finder"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Milisp <milisp@proton.me>"]
 edition = "2024"
 license = "MIT"
